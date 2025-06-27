@@ -10,6 +10,7 @@ class User(Base):
     name = Column(String(120), nullable=False)
     email = Column(String(120), unique=True, nullable=False)
     password_hash = Column(String(256), nullable=False)
+    role = Column(String(64), default='user')
 
     slot_users = relationship("SlotUser", back_populates="user")
 

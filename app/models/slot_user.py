@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, ForeignKey
+from sqlalchemy import Column, Integer, ForeignKey, String
 from sqlalchemy.orm import relationship
 from app.models import Base 
 
@@ -9,6 +9,7 @@ class SlotUser(Base):
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     slot_id = Column(Integer, ForeignKey('slots.id'), nullable=False)
     service_id = Column(Integer, ForeignKey('services.id'), nullable=False)
+    role = Column(String(64), default='user')
 
     user = relationship("User", back_populates="slot_users")
     service = relationship("Service", back_populates="slot_users")

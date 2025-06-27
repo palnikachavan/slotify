@@ -24,7 +24,7 @@ def register_tenant():
     except Exception as e:
         return jsonify({"error": f"Could not create database: {str(e)}"}), 500
 
-    tenant = Tenant(name=name, email=email, db_uri=db_uri)
+    tenant = Tenant(name=name, email=email, db_uri=db_uri, role='tenant_admin')
     tenant.password_hash = generate_password_hash(password)
     db.session.add(tenant)
     db.session.commit()
@@ -48,14 +48,47 @@ def login():
         return jsonify({'error': 'Invalid email or password'}), 401
 
     token_payload = {
-    'tenant_id': tenant.id,
-    'scope': 'tenant',
-    'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
-}
+        'tenant_id': tenant.id,
+        'user_id': tenant.id,
+        'scope': 'tenant',
+        'role': tenant.role, 
+        'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+    }
     token = jwt.encode(token_payload, SECRET, algorithm='HS256')
 
     return jsonify({
         'access_token': token,
         'tenant_name': tenant.name,
         'db_uri': tenant.db_uri
+    }), 200
+    
+@auth_bp.route('/admin/login', methods=['POST'])
+def login_global_admin():
+    data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
+
+    if not email or not password:
+        return jsonify({'error': 'Missing credentials'}), 400
+
+    # Load admin credentials from .env
+    admin_email = os.getenv('GLOBAL_ADMIN_EMAIL')
+    admin_password = os.getenv('GLOBAL_ADMIN_PASSWORD')
+
+    if email != admin_email or password != admin_password:
+        return jsonify({'error': 'Invalid credentials'}), 401
+
+    token_payload = {
+        'user_id': 0,
+        'scope': 'tenant',
+        'role': 'global_admin',
+        'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=12)
+    }
+
+    token = jwt.encode(token_payload, SECRET, algorithm='HS256')
+
+    return jsonify({
+        'access_token': token,
+        'email': email,
+        'role': 'global_admin'
     }), 200

@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify, g
-from app.utils.auth import login_required 
+from app.utils.auth import tenant_admin_required
 from app.tenants.database_router import get_tenant_session
 from app.models.service import Service
 from app.models.slot import Slot
@@ -8,7 +8,7 @@ booking_bp = Blueprint('bookings', __name__)
 
 # services routes
 @booking_bp.route('/services', methods=['POST'])
-@login_required(scope='tenant') 
+@tenant_admin_required 
 def create_service():
     tenant = g.tenant
     session = get_tenant_session(tenant.db_uri)
@@ -25,7 +25,7 @@ def create_service():
 
 
 @booking_bp.route('/services', methods=['GET'])
-@login_required(scope='tenant')
+@tenant_admin_required 
 def list_services():
     session = get_tenant_session(g.tenant.db_uri)
     services = session.query(Service).all()
@@ -33,7 +33,7 @@ def list_services():
 
 
 @booking_bp.route('/services/<int:service_id>', methods=['PUT'])
-@login_required(scope='tenant')
+@tenant_admin_required 
 def update_service(service_id):
     session = get_tenant_session(g.tenant.db_uri)
     service = session.query(Service).get(service_id)
@@ -48,7 +48,7 @@ def update_service(service_id):
 
 
 @booking_bp.route('/services/<int:service_id>', methods=['DELETE'])
-@login_required(scope='tenant')
+@tenant_admin_required 
 def delete_service(service_id):
     session = get_tenant_session(g.tenant.db_uri)
     service = session.query(Service).get(service_id)
@@ -61,7 +61,7 @@ def delete_service(service_id):
 
 # slots routes
 @booking_bp.route('/services/<int:service_id>/slots', methods=['POST'])
-@login_required(scope='tenant')
+@tenant_admin_required 
 def create_slot(service_id):
     data = request.get_json()
     session = get_tenant_session(g.tenant.db_uri)
@@ -78,7 +78,7 @@ def create_slot(service_id):
 
 
 @booking_bp.route('/services/<int:service_id>/slots', methods=['GET'])
-@login_required(scope='tenant')
+@tenant_admin_required 
 def list_slots(service_id):
     session = get_tenant_session(g.tenant.db_uri)
     slots = session.query(Slot).filter_by(service_id=service_id).all()
@@ -93,7 +93,7 @@ def list_slots(service_id):
 
 
 @booking_bp.route('/slots/<int:slot_id>', methods=['PUT'])
-@login_required(scope='tenant')
+@tenant_admin_required 
 def update_slot(slot_id):
     session = get_tenant_session(g.tenant.db_uri)
     slot = session.query(Slot).get(slot_id)
@@ -109,7 +109,7 @@ def update_slot(slot_id):
 
 
 @booking_bp.route('/slots/<int:slot_id>', methods=['DELETE'])
-@login_required(scope='tenant')
+@tenant_admin_required 
 def delete_slot(slot_id):
     session = get_tenant_session(g.tenant.db_uri)
     slot = session.query(Slot).get(slot_id)

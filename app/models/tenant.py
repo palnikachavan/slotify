@@ -9,6 +9,7 @@ class Tenant(db.Model):
     email = db.Column(db.String(100), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
     db_uri = db.Column(db.Text, nullable=False)
+    role = db.Column(db.String(64), default='tenant_admin')
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
     def set_password(self, password):

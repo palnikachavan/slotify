@@ -18,6 +18,9 @@ def create_app():
     from app.routes.booking_routes import booking_bp
     from app.routes.user_auth_routes import user_auth_bp
     from app.routes.user_booking_routes import user_booking_bp
+    from app.routes.admin_routes import admin_bp
+    
+    app.register_blueprint(admin_bp, url_prefix='/admin')
 
     app.register_blueprint(user_auth_bp, url_prefix='/user/auth')
     app.register_blueprint(user_booking_bp, url_prefix='/user/bookings')

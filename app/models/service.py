@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Text
 from sqlalchemy.orm import relationship
-from app.models import Base  # shared Base
+from app.models import Base 
 
 class Service(Base):
     __tablename__ = 'services'

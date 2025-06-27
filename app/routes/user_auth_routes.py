@@ -3,7 +3,7 @@ from sqlalchemy.exc import IntegrityError
 from app.models.users import User
 from app.utils.auth import generate_token
 from app.tenants.database_router import get_tenant_session
-from app.models.tenant import Tenant  # import Tenant model
+from app.models.tenant import Tenant
 
 user_auth_bp = Blueprint('user_auth', __name__)
 
@@ -28,7 +28,7 @@ def register_user():
     if session.query(User).filter_by(email=email).first():
         return jsonify({'error': 'Email already exists'}), 400
 
-    user = User(name=name, email=email)
+    user = User(name=name, email=email, role='user') 
     user.set_password(password)
 
     try:
@@ -59,7 +59,7 @@ def login_user():
     user = session.query(User).filter_by(email=email).first()
 
     if user and user.check_password(password):
-        token = generate_token(user.id, tenant_id, scope='user')
+        token = generate_token(user.id, tenant_id, role=user.role, scope='user')
         return jsonify({'token': token}), 200
 
     return jsonify({'error': 'Invalid credentials'}), 401

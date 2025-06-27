@@ -14,15 +14,13 @@ def get_tenant_session(db_uri):
 
 def create_database_if_not_exists(db_uri):
     parsed = urlparse(db_uri)
-    db_name = parsed.path[1:]  # 'acme_db'
+    db_name = parsed.path[1:]  
     admin_db_uri = db_uri.replace(f"/{db_name}", "/postgres")  # connect to postgres default DB
 
     engine = create_engine(admin_db_uri, isolation_level="AUTOCOMMIT")
     with engine.connect() as conn:
-        # Use IF NOT EXISTS to prevent duplicate creation attempts
         conn.execute(text(f"CREATE DATABASE {db_name}"))
 
-# ✅ ADD THIS TO CREATE TENANT TABLES LIKE 'slot_users'
 def setup_tenant_schema(db_uri):
     engine = create_engine(db_uri)
-    Base.metadata.create_all(bind=engine)  # This ensures 'slot_users', 'slots', 'services' are created
+    Base.metadata.create_all(bind=engine) 
