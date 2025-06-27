@@ -1,0 +1,7 @@
+.env
+migrations/
+__pycache__/
+models/__pycache__/
+routes/__pycache__/
+tenants/__pycache__/
+utils/__pycache__/
