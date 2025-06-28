@@ -1,1 +1,7 @@
 flask
+python-dotenv
+flask-migrate
+psycopg2
+flask-sqlalchemy
+werkzeug
+pyjwt

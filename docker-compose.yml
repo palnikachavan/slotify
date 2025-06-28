@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_USER: pari
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: globalDB 
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data 
+
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    environment:
+      FLASK_APP: run.py
+      FLASK_ENV: development
+      GLOBAL_DB_URI: postgresql://postgres:example@db:5432/globalDB
+    depends_on:
+      - db
+    restart: always
+
+volumes:
+  pgdata:
+
