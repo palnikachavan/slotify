@@ -36,55 +36,59 @@ An advanced **Slot Booking System** designed with multi-tenancy architecture to 
 
 ---
 
-## 🚀 Installation
+## 🚀 Step by Step Installation
 
-You can run the app in two ways:
-
----
-
-### ✅ Option 1: Run with Docker
-
-#### 📦 Step-by-Step
 
 1. **Clone the Repository**
 
 ```bash
-   git clone https://github.com/yourusername/slot-booking-app.git
-   cd slot-booking-app
+git clone https://github.com/yourusername/slot-booking-app.git
+cd slot-booking-app
 ```
 
 
-2. **Paste the following in your .env file and add required values**
+2. **Make a .env file and paste the following in your file and add required values**
 
 ```bash
-   SECRET_KEY=
-   JWT_EXPIRY_MINUTES=
-   GLOBAL_ADMIN_EMAIL=
-   GLOBAL_ADMIN_PASSWORD=
+SECRET_KEY=
+JWT_EXPIRY_MINUTES=
+GLOBAL_ADMIN_EMAIL=
+GLOBAL_ADMIN_PASSWORD=
 
-   # Do not change these
-   ROLE_GLOBAL_ADMIN = global_admin
-   ROLE_TENANT_ADMIN = tenant_admin
-   ROLE_USER = user
+# Do not change these
+ROLE_GLOBAL_ADMIN = global_admin
+ROLE_TENANT_ADMIN = tenant_admin
+ROLE_USER = user
 ```
 
-3. **Run Docker Compose**
+**OR**
+
+2. **Insert from terminal using echo**
+
+```bash
+echo SECRET_KEY=your_secret_key_here >> .env
+echo JWT_EXPIRY_MINUTES=integer >> .env
+echo GLOBAL_ADMIN_EMAIL=admin@example.com >> .env
+echo GLOBAL_ADMIN_PASSWORD=your_password_here >> .env
+```
+
+3. **Install Using Docker Compose**
 
 
 ```bash
-   docker-compose up --build
+docker-compose up --build
 ```
 
 4. **App is running at**
 
 ```bash
-   http://localhost:5000
+http://localhost:5000
 ```
 
 
 5. **To stop containers**
 ```bash
-   docker-compose down
+docker-compose down
 ```
 
 ### ✅ Option 2: Run without Docker
@@ -94,38 +98,50 @@ You can run the app in two ways:
 1. **Clone the Repository**
 
 ```bash
-   git clone https://github.com/yourusername/slot-booking-app.git
-   cd slot-booking-app
+git clone https://github.com/yourusername/slot-booking-app.git
+cd slot-booking-app
 ```
 
 2. **Create Virtual Environment**
 
 ```bash
-   python -m venv venv
-   source venv/bin/activate
+python -m venv venv
+source venv/bin/activate
 ```
 
 3. **Install Dependencies**
 
 ```bash
-   pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
-4. **Paste the following in your .env file and add required values**
-```bash
-   SECRET_KEY=
-   JWT_EXPIRY_MINUTES=
-   GLOBAL_ADMIN_EMAIL=
-   GLOBAL_ADMIN_PASSWORD=
+4. **Make a .env file and paste the following in your file and add required values**
 
-   # Do not change these
-   ROLE_GLOBAL_ADMIN = global_admin
-   ROLE_TENANT_ADMIN = tenant_admin
-   ROLE_USER = user
+```bash
+SECRET_KEY=
+JWT_EXPIRY_MINUTES=
+GLOBAL_ADMIN_EMAIL=
+GLOBAL_ADMIN_PASSWORD=
+
+# Do not change these
+ROLE_GLOBAL_ADMIN = global_admin
+ROLE_TENANT_ADMIN = tenant_admin
+ROLE_USER = user
+```
+
+**OR**
+
+4. **Insert from terminal using echo**
+
+```bash
+echo SECRET_KEY=your_secret_key_here >> .env
+echo JWT_EXPIRY_MINUTES=integer-value >> .env
+echo GLOBAL_ADMIN_EMAIL=admin@example.com >> .env
+echo GLOBAL_ADMIN_PASSWORD=your_password_here >> .env
 ```
 
 5. **Run the app**
 
 ```bash
-   flask run
+flask run
 ```
