@@ -1,6 +1,6 @@
-# 🗓️ Slot Booking App (Multi-Tenant SaaS Application)
+# 🗓️ Slotify (Multi-Tenant SaaS Application)
 
-An advanced **Slot Booking System** designed with multi-tenancy architecture to allow multiple companies or clinics to manage their own isolated bookings securely and independently.
+An advanced **Slotify (A Slot Booking System)** designed with multi-tenancy architecture to allow multiple companies or clinics to manage their own isolated bookings securely and independently.
 
 ### 🔍 Description
 
@@ -42,8 +42,8 @@ An advanced **Slot Booking System** designed with multi-tenancy architecture to 
 1. **Clone the Repository**
 
 ```bash
-git clone https://github.com/yourusername/slot-booking-app.git
-cd slot-booking-app
+git clone https://github.com/palnikachavan/slotify.git
+cd slotify
 ```
 
 
@@ -98,8 +98,8 @@ docker-compose down
 1. **Clone the Repository**
 
 ```bash
-git clone https://github.com/yourusername/slot-booking-app.git
-cd slot-booking-app
+git clone https://github.com/palnikachavan/slotify.git
+cd slotify
 ```
 
 2. **Create Virtual Environment**
