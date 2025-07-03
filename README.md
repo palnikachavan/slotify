@@ -39,6 +39,8 @@ An advanced **Slotify (A Slot Booking System)** designed with multi-tenancy arch
 ## 🚀 Step by Step Installation
 
 
+### Method 1: Run with Docker
+
 1. **Clone the Repository**
 
 ```bash
@@ -91,9 +93,7 @@ http://localhost:5000
 docker-compose down
 ```
 
-### ✅ Option 2: Run without Docker
-
-#### 📦 Step-by-Step
+### Method 2: Run without Docker
 
 1. **Clone the Repository**
 
