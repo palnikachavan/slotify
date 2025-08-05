@@ -78,7 +78,7 @@ echo GLOBAL_ADMIN_PASSWORD=your_password_here >> .env
 
 
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
 4. **App is running at**
@@ -90,7 +90,7 @@ http://localhost:5000
 
 5. **To stop containers**
 ```bash
-docker-compose down
+docker compose down
 ```
 
 ### Method 2: Run without Docker
